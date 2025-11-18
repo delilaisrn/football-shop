@@ -97,3 +97,31 @@ Hijau untuk My Products
 Merah untuk Create Product
 
 Dengan cara ini, setiap elemen aplikasi tetap selaras dengan brand "Football Shop" dan pengguna bisa mengenali fungsi tiap tombol hanya dari warnanya.
+
+## TUGAS 9
+
+1. Kita perlu membuat model Dart karena model memberi struktur yang jelas untuk data yang datang dari JSON. Model menjaga tipe data tetap konsisten, membantu null-safety, dan membuat kode lebih mudah dirawat. Jika langsung memakai Map<String, dynamic>, kita tidak mendapat perlindungan tipe, lebih mudah terjadi error saat runtime, dan perubahan struktur data menjadi sulit dilacak. Tanpa model, kode cepat berantakan dan rawan crash.
+
+2. Package http dipakai untuk melakukan request HTTP biasa seperti GET atau POST tanpa autentikasi berbasis session. CookieRequest digunakan khusus untuk autentikasi Django karena ia menyimpan dan mengirim session cookie secara otomatis. http cocok untuk komunikasi stateless, sedangkan CookieRequest dipakai untuk fitur yang memerlukan login dan menjaga session tetap aktif.
+
+3. Instance CookieRequest perlu dibagikan ke semua komponen agar seluruh halaman menggunakan session yang sama. Jika setiap halaman punya instance sendiri, Django tidak mengenali user sebagai session yang sama sehingga request bisa dianggap tidak login. Dengan membagikan CookieRequest lewat Provider, status login selalu konsisten di seluruh aplikasi.
+
+4. Flutter perlu konfigurasi khusus agar bisa berkomunikasi dengan Django. 10.0.2.2 ditambahkan ke ALLOWED_HOSTS karena Android emulator menggunakan alamat itu untuk mengakses komputer host. CORS perlu diaktifkan agar Django mengizinkan request dari aplikasi Flutter. Pengaturan SameSite dan cookie harus disesuaikan agar session cookie bisa dikirim dari mobile. Android juga harus diberi izin internet di manifest agar request bisa berjalan. Jika konfigurasi ini tidak benar, request akan gagal, cookie tidak terkirim, autentikasi tidak jalan, atau Flutter tidak bisa mengakses server sama sekali.
+
+5. Data dikirim mulai dari user mengisi form di Flutter. Input dikumpulkan menjadi map, lalu dikirim ke Django dalam bentuk JSON melalui POST. Django menerima data, memprosesnya, memvalidasi, dan menyimpan ke database. Django kemudian mengirim kembali JSON sebagai response. Flutter menerima response, mengubahnya menjadi object Dart melalui model, lalu menampilkannya pada UI menggunakan FutureBuilder atau setState.
+
+6. Pada login, Flutter mengirim username dan password ke Django menggunakan CookieRequest. Django memverifikasi data, membuat session, dan mengirim cookie sessionid. CookieRequest menyimpan cookie tersebut sehingga request berikutnya dianggap berasal dari user yang sudah login. Register bekerja dengan alur yang sama, hanya saja Django membuat user baru terlebih dahulu. Logout dilakukan dengan request ke endpoint logout Django yang menghapus session. Setelah session hilang, CookieRequest menghapus cookie lokal dan Flutter menyesuaikan tampilan menu ke kondisi tidak login.
+
+7. Pertama saya memastikan backend Django berjalan normal, model produk sudah benar, dan semua endpoint JSON bisa diakses. Setelah itu saya menyesuaikan pengaturan seperti ALLOWED_HOSTS, CORS, dan konfigurasi cookie supaya bisa diakses dari Flutter.
+
+Saya menyiapkan Flutter dengan menambahkan Provider dan CookieRequest, lalu mengatur CookieRequest supaya dibagikan ke seluruh aplikasi melalui main.dart. Ini supaya autentikasi Django bisa dipakai di semua halaman.
+
+Setelah itu saya membuat model Dart yang sesuai dengan struktur model Django. Model ini saya pakai untuk mengubah JSON menjadi objek Dart yang lebih aman dan mudah digunakan di UI.
+
+Saya membuat halaman registrasi dan login di Flutter, lalu menghubungkannya dengan endpoint Django menggunakan CookieRequest. Saya memastikan session cookie tersimpan sehingga user dianggap login.
+
+Saya membuat halaman daftar item yang mengambil data dari endpoint JSON Django, memparsenya ke model Dart, lalu menampilkannya dalam bentuk card. Dari card ini saya hubungkan navigasi ke halaman detail produk.
+
+Setelah halaman utama berfungsi, saya membuat halaman detail produk yang menampilkan semua atribut item, termasuk tombol untuk kembali ke daftar item.
+
+Untuk fitur My Products, saya membuat endpoint yang hanya menampilkan produk milik user yang sedang login, lalu membuat halaman Flutter yang mengambil data dari endpoint tersebut.

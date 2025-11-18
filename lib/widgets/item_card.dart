@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_shop/screens/product_form.dart';
+import 'package:football_shop/screens/products_entry_list.dart';
+import 'package:football_shop/screens/my_products.dart';
 
 class ItemHomepage {
   final String name;
@@ -32,6 +34,18 @@ class ItemCard extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const ProductFormPage()),
+            );
+          } else if (item.name == "All Products") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ProductsEntryListPage()
+                ),
+            );
+          } else if (item.name == "My Products") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MyProductsListPage()),
             );
           }
         },
