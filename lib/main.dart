@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-        title: 'Football Shop',
+        title: 'Saturn Sports Station',
         theme: ThemeData(
-         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(secondary: Colors.blueAccent[400]),
+         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: const Color.fromARGB(255, 109, 41, 255)),
         ),
         home: const LoginPage(),
       ),

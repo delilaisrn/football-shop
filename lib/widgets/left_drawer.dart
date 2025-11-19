@@ -13,11 +13,11 @@ class LeftDrawer extends StatelessWidget {
       child: ListView(
         children: [
           const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: Color.fromARGB(255, 114, 33, 243)),
             child: Column(
               children: [
                 Text(
-                  'Football Shop',
+                  'Saturn Sports Station',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,

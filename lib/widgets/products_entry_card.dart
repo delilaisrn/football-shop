@@ -20,7 +20,7 @@ class ProductsEntryCard extends StatelessWidget {
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(color: Colors.grey.shade300),
+            side: BorderSide(color: const Color.fromARGB(255, 204, 145, 255)),
           ),
           elevation: 2,
           child: Padding(
@@ -77,7 +77,7 @@ class ProductsEntryCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.green,
+                    color: Color.fromARGB(255, 120, 76, 175),
                   ),
                 ),
                 const SizedBox(height: 6),

@@ -36,7 +36,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tambah Produk Baru'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 138, 33, 243),
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -166,7 +166,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color.fromARGB(255, 194, 33, 243),
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () async {
